@@ -4,33 +4,71 @@
   <meta charset="UTF-8" />
   <title>Telegram WebApp</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
   <style>
     body {
+      margin: 0;
       font-family: sans-serif;
+      background: #111;
+      color: white;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      gap: 20px;
     }
 
-    button {
-      padding: 12px;
-      font-size: 16px;
+    h2 {
+      margin: 0;
+      font-size: 22px;
     }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .btn {
+      height: 120px;
+      border: none;
+      border-radius: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.1s ease, opacity 0.1s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+      opacity: 0.85;
+    }
+
+    /* Kahoot-style colors */
+    .red { background: #e74c3c; }
+    .blue { background: #3498db; }
+    .green { background: #2ecc71; }
+    .yellow { background: #f1c40f; color: #111; }
   </style>
 </head>
 
 <body>
   <h2>Choose an action</h2>
 
-  <button onclick="sendData('button_1')">Button 1</button>
-  <button onclick="sendData('button_2')">Button 2</button>
-  <button onclick="sendData('button_3')">Button 3</button>
-  <button onclick="sendData('button_4')">Button 4</button>
+  <div class="grid">
+    <button class="btn red" onclick="sendData('button_1')">Option 1</button>
+    <button class="btn blue" onclick="sendData('button_2')">Option 2</button>
+    <button class="btn green" onclick="sendData('button_3')">Option 3</button>
+    <button class="btn yellow" onclick="sendData('button_4')">Option 4</button>
+  </div>
 
   <script>
     const tg = window.Telegram.WebApp;
-    tg.expand(); // expand to full height
+    tg.ready(); // initialize WebApp
 
     function sendData(value) {
       tg.sendData(JSON.stringify({
